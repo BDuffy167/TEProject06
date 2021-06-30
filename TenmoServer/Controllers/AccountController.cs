@@ -15,10 +15,10 @@ namespace TenmoServer.Controllers
     [Authorize]
 
     
-    public class AccountContoller : ControllerBase
+    public class AccountController : ControllerBase
     {
         private readonly IAccountDAO accountDAO;
-        public AccountContoller (IAccountDAO dao)
+        public AccountController (IAccountDAO dao)
         {
             this.accountDAO = dao;
         }
