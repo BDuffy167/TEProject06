@@ -10,20 +10,20 @@ using TenmoServer.Models;
 
 namespace TenmoServer.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
-    [Authorize]
-
     
     public class AccountController : ControllerBase
     {
         private readonly IAccountDAO accountDAO;
+        private readonly IUserDAO userDAO;
+
         public AccountController (IAccountDAO dao)
         {
             this.accountDAO = dao;
         }
 
-        [HttpGet]
+        [HttpGet("user")]
         public ActionResult<UserAccount> GetAccountBalance(User user)
         {
             return Ok(this.accountDAO.GetAccountBalance(user));

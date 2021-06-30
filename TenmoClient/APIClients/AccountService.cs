@@ -20,7 +20,7 @@ namespace TenmoClient.APIClients
 
         public string ShowAccountBalance()
         {
-            RestRequest request = new RestRequest($"{API_BASE_URL}/api/account");
+            RestRequest request = new RestRequest($"{API_BASE_URL}account");
 
             IRestResponse<API_UserAccount> response = client.Get<API_UserAccount>(request);
             if (response.IsSuccessful)
