@@ -7,19 +7,19 @@ using TenmoClient.Data;
 
 namespace TenmoClient.APIClients
 {
-    public class AccountService
+    public class TransferService
     {
         private readonly string API_BASE_URL;
         private readonly RestClient client;
 
-        public AccountService() // Add argument to pass private URL?
+        public TransferService() // Add argument to pass private URL?
         {
             this.API_BASE_URL = AuthService.API_BASE_URL;
 
             this.client = new RestClient();
         }
 
-        public void UpdateToken(string token)
+        public void UpdateToken(string token)  // Delete probably?
         {
             if (string.IsNullOrEmpty(token))
             {
@@ -31,25 +31,21 @@ namespace TenmoClient.APIClients
             }
         }
 
-        public string ShowAccountBalance()
+        public List<API_User> ListAllUsers()
         {
-            RestRequest request = new RestRequest($"{API_BASE_URL}account");
+            RestRequest request = new RestRequest($"{API_BASE_URL}transfer");
 
-            IRestResponse<API_UserAccount> response = client.Get<API_UserAccount>(request);
+            IRestResponse<List<API_User>> response = client.Get<List<API_User>>(request);
             if (response.IsSuccessful)
             {
-                //API_UserAccount usersAccount = new API_UserAccount();
-                API_UserAccount usersAccount = response.Data;
-                return usersAccount.Balance.ToString("C2");
+                return response.Data;
             }
             else
             {
                 //What do we return here with failed Get
-                Console.WriteLine("There is a problem with the Get"); // make more explicit later
+                Console.WriteLine("There is a problem with the Get");
                 return null;
             }
         }
-
-        
     }
 }

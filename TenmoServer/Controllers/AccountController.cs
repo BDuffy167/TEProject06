@@ -16,7 +16,7 @@ namespace TenmoServer.Controllers
     public class AccountController : ControllerBase
     {
         private readonly IAccountDAO accountDAO;
-        private readonly IUserDAO userDAO;
+        //private readonly IUserDAO userDAO;
 
         public AccountController (IAccountDAO dao)
         {
@@ -24,12 +24,10 @@ namespace TenmoServer.Controllers
 
         }
 
-        [HttpGet] //
+        [HttpGet] 
         public ActionResult<UserAccount> GetAccountBalance()
         {
             int userId = int.Parse(this.User.FindFirst("sub").Value);
-
-            // 
 
             return Ok(this.accountDAO.GetAccountBalance(userId));
         }

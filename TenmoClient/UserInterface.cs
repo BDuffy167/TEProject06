@@ -9,6 +9,7 @@ namespace TenmoClient
         private readonly ConsoleService consoleService = new ConsoleService();
         private readonly AuthService authService = new AuthService();
         private readonly AccountService accountService = new AccountService();
+        private readonly TransferService transferService = new TransferService();
 
         private bool quitRequested = false;
 
@@ -87,7 +88,9 @@ namespace TenmoClient
                             Console.WriteLine("NOT IMPLEMENTED!"); // TODO: Implement me
                             break;
                         case 4: // Send TE Bucks
-                            Console.WriteLine("NOT IMPLEMENTED!"); // TODO: Implement me
+                            transferService.ListAllUsers();
+
+                            //Console.WriteLine("NOT IMPLEMENTED!"); // TODO: Implement me
                             break;
                         case 5: // Request TE Bucks
                             Console.WriteLine("NOT IMPLEMENTED!"); // TODO: Implement me
