@@ -16,7 +16,7 @@ namespace TenmoServer.DAO
             connectionString = dbConnectionString;
         }
 
-        public List<User> GetUsers()
+        public List<User> GetUsersForTransfer()
         {
             List<User> returnUsers = new List<User>();
 

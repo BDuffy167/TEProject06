@@ -15,21 +15,22 @@ namespace TenmoServer.Controllers
     [Authorize]
     public class TransferController : ControllerBase
     {
-        private readonly IUserDAO userDAO;
+        private readonly ITransferDAO transferDAO;
 
-        //public TransferController(ITransferDAO dao)
-        //{
-        //    this.userDAO = dao;
-        //}
+        public TransferController(ITransferDAO dao)
+        {
+            this.transferDAO = dao;
+        }
 
 
 
         [HttpGet]
+        [AllowAnonymous]
         public ActionResult<List<User>> GetUsers()
         {
             //int userId = int.Parse(this.User.FindFirst("sub").Value);
 
-            return Ok(this.userDAO.GetUsers());
+            return Ok(this.transferDAO.GetUsersForTransfer());
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using TenmoClient.APIClients;
 using TenmoClient.Data;
 
@@ -88,7 +89,12 @@ namespace TenmoClient
                             Console.WriteLine("NOT IMPLEMENTED!"); // TODO: Implement me
                             break;
                         case 4: // Send TE Bucks
-                            transferService.ListAllUsers();
+                            List<API_User> users = transferService.ListAllUsers();
+                            foreach (API_User user in users)
+                            {
+                                Console.WriteLine($"{user.UserId})  {user.Username}");
+                            }
+
 
                             //Console.WriteLine("NOT IMPLEMENTED!"); // TODO: Implement me
                             break;
