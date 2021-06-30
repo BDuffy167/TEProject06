@@ -20,7 +20,21 @@ namespace TenmoClient.APIClients
 
         public string ShowAccountBalance()
         {
+            RestRequest request = new RestRequest(API_BASE_URL);
 
+            IRestResponse<API_UserAccount> response = client.Get<API_UserAccount>(request);
+            if (response.IsSuccessful)
+            {
+                API_UserAccount usersAccount = new API_UserAccount();
+                usersAccount = response.Data;
+                return usersAccount.Balance.ToString("C2");
+            }
+            else
+            {
+                //What do we return here with failed Get
+                Console.WriteLine("There is a problem with the Get");
+                return null;
+            }
         }
     }
 }

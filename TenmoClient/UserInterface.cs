@@ -1,4 +1,5 @@
 ﻿using System;
+using TenmoClient.APIClients;
 using TenmoClient.Data;
 
 namespace TenmoClient
@@ -7,6 +8,7 @@ namespace TenmoClient
     {
         private readonly ConsoleService consoleService = new ConsoleService();
         private readonly AuthService authService = new AuthService();
+        private readonly AccountService accountService = new AccountService();
 
         private bool quitRequested = false;
 
@@ -75,7 +77,8 @@ namespace TenmoClient
                     switch (menuSelection)
                     {
                         case 1: // View Balance
-                            Console.WriteLine("NOT IMPLEMENTED!"); // TODO: Implement me
+                            
+                            Console.WriteLine(accountService.ShowAccountBalance()); // TODO: Implement me
                             break;
                         case 2: // View Past Transfers
                             Console.WriteLine("NOT IMPLEMENTED!"); // TODO: Implement me
