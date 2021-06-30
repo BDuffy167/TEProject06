@@ -17,7 +17,7 @@ namespace TenmoServer.DAO
         }
         private string GetAccountBalanceSQL = "SELECT user_id, account_id, balance FROM accounts WHERE user_id = @User_Id";
 
-        public UserAccount GetAccountBalance(User user)
+        public UserAccount GetAccountBalance(int userId)
         {
             //UserAccount result = new UserAccount();
 
@@ -26,7 +26,7 @@ namespace TenmoServer.DAO
                 conn.Open();
 
                 SqlCommand cmd = new SqlCommand(GetAccountBalanceSQL, conn);
-                cmd.Parameters.AddWithValue("@User_Id", user.UserId);
+                cmd.Parameters.AddWithValue("@User_Id", userId);
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 if (reader.Read())

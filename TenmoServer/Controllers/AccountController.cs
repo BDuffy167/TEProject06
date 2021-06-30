@@ -12,7 +12,7 @@ namespace TenmoServer.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    
+    [Authorize]
     public class AccountController : ControllerBase
     {
         private readonly IAccountDAO accountDAO;
@@ -21,12 +21,17 @@ namespace TenmoServer.Controllers
         public AccountController (IAccountDAO dao)
         {
             this.accountDAO = dao;
+
         }
 
-        [HttpGet("user")]
-        public ActionResult<UserAccount> GetAccountBalance(User user)
+        [HttpGet] //
+        public ActionResult<UserAccount> GetAccountBalance()
         {
-            return Ok(this.accountDAO.GetAccountBalance(user));
+            int userId = int.Parse(this.User.FindFirst("sub").Value);
+
+            // 
+
+            return Ok(this.accountDAO.GetAccountBalance(userId));
         }
 
     }

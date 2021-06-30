@@ -1,4 +1,5 @@
 ﻿using RestSharp;
+using RestSharp.Authenticators;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -18,6 +19,18 @@ namespace TenmoClient.APIClients
             this.client = new RestClient();
         }
 
+        public void UpdateToken(string token)
+        {
+            if (string.IsNullOrEmpty(token))
+            {
+                this.client.Authenticator = null;
+            }
+            else
+            {
+                this.client.Authenticator = new JwtAuthenticator(token);
+            }
+        }
+
         public string ShowAccountBalance()
         {
             RestRequest request = new RestRequest($"{API_BASE_URL}account");
@@ -25,8 +38,8 @@ namespace TenmoClient.APIClients
             IRestResponse<API_UserAccount> response = client.Get<API_UserAccount>(request);
             if (response.IsSuccessful)
             {
-                API_UserAccount usersAccount = new API_UserAccount();
-                usersAccount = response.Data;
+                //API_UserAccount usersAccount = new API_UserAccount();
+                API_UserAccount usersAccount = response.Data;
                 return usersAccount.Balance.ToString("C2");
             }
             else
@@ -36,5 +49,7 @@ namespace TenmoClient.APIClients
                 return null;
             }
         }
+
+        
     }
 }

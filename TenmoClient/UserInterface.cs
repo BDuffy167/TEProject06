@@ -131,6 +131,7 @@ namespace TenmoClient
                 if (user != null)
                 {
                     UserService.SetLogin(user);
+                    this.accountService.UpdateToken(user.Token);
                 }
             }
         }
