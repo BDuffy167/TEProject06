@@ -41,8 +41,8 @@ namespace TenmoClient.APIClients
             if (response.IsSuccessful)
             {
                 //API_UserAccount usersAccount = new API_UserAccount();
-                API_UserAccount usersAccount = response.Data;
-                return usersAccount.Balance.ToString("C2");
+                API_UserAccount userAccount = response.Data;
+                return userAccount.Balance.ToString("C2");
             }
             else
             {
@@ -52,6 +52,9 @@ namespace TenmoClient.APIClients
             }
         }
 
-        
+        //public API_UserAccount GetAccountInfo()
+        //{
+
+        //}
     }
 }

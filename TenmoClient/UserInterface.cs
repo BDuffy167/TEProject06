@@ -90,17 +90,29 @@ namespace TenmoClient
                             Console.WriteLine("NOT IMPLEMENTED!"); // TODO: Implement me
                             break;
                         case 4: // Send TE Bucks
-                            List<API_User> users = transferService.ListAllUsers();
-                            foreach (API_User user in users)
+                            List<API_User> usersSend = transferService.ListAllUsers(); //don't list current user
+                            foreach (API_User user in usersSend)
                             {
-                                Console.WriteLine($"{user.UserId})  {user.Username}");
+                                Console.WriteLine($"{user.UserId})  {user.Username}"); 
                             }
+                            int transferToId = consoleService.PromptForTransferID("transfer money to.");
 
+                            foreach (API_User user in usersSend)
+                            {
+                                if (transferToId == user.UserId)
+                                {
+                                    //consoleService.PromptForTransferAmount(API_UserAccount );
+                                }
+                            }
 
                             //Console.WriteLine("NOT IMPLEMENTED!"); // TODO: Implement me
                             break;
                         case 5: // Request TE Bucks
-                            Console.WriteLine("NOT IMPLEMENTED!"); // TODO: Implement me
+                            List<API_User> usersReq = transferService.ListAllUsers(); //don't list current user
+                            foreach (API_User user in usersReq)
+                            {
+                                Console.WriteLine($"{user.UserId})  {user.Username}");
+                            }
                             break;
                         case 6: // Log in as someone else
                             Console.WriteLine();
