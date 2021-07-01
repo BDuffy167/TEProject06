@@ -142,6 +142,7 @@ namespace TenmoClient
                     UserService.SetLogin(user);
                     //this.accountService.UpdateToken(user.Token);
                     //this.transferService.UpdateToken(user.Token);
+                    string JWTtoken = user.Token;
                 }
             }
         }

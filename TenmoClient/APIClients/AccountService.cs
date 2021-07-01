@@ -34,7 +34,7 @@ namespace TenmoClient.APIClients
         public string ShowAccountBalance()
         {
             RestRequest request = new RestRequest($"{API_BASE_URL}user/account");
-            request.AddHeader("Authorization", "bearer " + API_User.user.Token); //Use manually until we can find a shortcut
+            //request.AddHeader("Authorization", "bearer " + API_User.user.Token); //Use manually until we can find a shortcut
 
             IRestResponse<API_UserAccount> response = client.Get<API_UserAccount>(request);
             if (response.IsSuccessful)
