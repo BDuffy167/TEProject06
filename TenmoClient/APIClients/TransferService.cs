@@ -48,5 +48,10 @@ namespace TenmoClient.APIClients
                 return null;
             }
         }
+
+        public void BeginMoneyTransfer(int transferFromId, int transferToId)
+        {
+            Console.WriteLine("It's working, keep going.");
+        }
     }
 }

@@ -79,9 +79,24 @@ namespace TenmoClient
             }
         }
 
-        //public decimal PromptForTransferAmount(string message)
+        //public int FindTransferUserId(int transferId, List<API_User> users)
         //{
+        //    foreach (API_User user in users)
+        //    {
+        //        if (user.UserId == transferId)
+        //        {
 
+        //        }
+        //    }
         //}
+
+
     }
+
+    //public decimal PromptForTransferAmount(string message)
+    //{
+
+    //}
 }
+
+

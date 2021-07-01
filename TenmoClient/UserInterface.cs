@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using TenmoClient.APIClients;
 using TenmoClient.Data;
 
@@ -12,7 +13,7 @@ namespace TenmoClient
         private readonly AccountService accountService = new AccountService();
         private readonly TransferService transferService = new TransferService();
 
-        
+        //int test = UserService.UserId;
 
         private bool quitRequested = false;
 
@@ -93,16 +94,28 @@ namespace TenmoClient
                         case 4: // Send TE Bucks
                             List<API_User> users = transferService.GetAllUsers(); //don't list current user
                             consoleService.ListAllUsers(users);
-
                             int transferId = consoleService.PromptForTransferID("send money.");
 
-                      
+                            foreach (API_User user in users)
+                            {
+                                if (user.UserId == transferId)
+                                {
+                                    transferService.BeginMoneyTransfer(UserService.UserId, transferId);
+                                }
+                            }
                             break;
                         case 5: // Request TE Bucks
                             users = transferService.GetAllUsers(); //don't list current user
                             consoleService.ListAllUsers(users);
-
                             transferId = consoleService.PromptForTransferID("request money.");
+
+                            foreach (API_User user in users)
+                            {
+                                if (user.UserId == transferId)
+                                {
+                                    transferService.BeginMoneyTransfer(transferId, UserService.UserId);
+                                }
+                            }
                             break;
                         case 6: // Log in as someone else
                             Console.WriteLine();
