@@ -25,7 +25,7 @@ namespace TenmoServer.Controllers
 
 
         [HttpGet]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public ActionResult<List<User>> GetUsers()
         {
             //int userId = int.Parse(this.User.FindFirst("sub").Value);
