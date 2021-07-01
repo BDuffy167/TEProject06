@@ -11,6 +11,7 @@ namespace TenmoClient
         private readonly AuthService authService = new AuthService();
         private readonly AccountService accountService = new AccountService();
         private readonly TransferService transferService = new TransferService();
+        
 
         private bool quitRequested = false;
 
@@ -140,9 +141,9 @@ namespace TenmoClient
                 if (user != null)
                 {
                     UserService.SetLogin(user);
-                    //this.accountService.UpdateToken(user.Token);
+                    this.accountService.UpdateToken(user.Token);
                     //this.transferService.UpdateToken(user.Token);
-                    string JWTtoken = user.Token;
+                    
                 }
             }
         }

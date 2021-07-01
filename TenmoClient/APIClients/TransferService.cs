@@ -34,7 +34,7 @@ namespace TenmoClient.APIClients
         public List<API_User> ListAllUsers()
         {
             RestRequest request = new RestRequest($"{API_BASE_URL}user/accounts/transfer");
-            request.AddHeader("Authorization", "bearer " + UserService.Token); //Use manually until we can find a shortcut
+            //request.AddHeader("Authorization", "bearer " + UserService.Token); //Use manually until we can find a shortcut
 
             IRestResponse<List<API_User>> response = client.Get<List<API_User>>(request);
             if (response.IsSuccessful)
