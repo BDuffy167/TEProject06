@@ -19,21 +19,21 @@ namespace TenmoClient.APIClients
             this.client = new RestClient();
         }
 
-        //public void UpdateToken(string token) //this is happening on login but probably shouldnt
-        //{
-        //    if (string.IsNullOrEmpty(token))
-        //    {
-        //        this.client.Authenticator = null;
-        //    }
-        //    else
-        //    {
-        //        this.client.Authenticator = new JwtAuthenticator(token);
-        //    }
-        //}
+        public void UpdateToken(string token) //this is happening on login but probably shouldnt
+        {
+            if (string.IsNullOrEmpty(token))
+            {
+                this.client.Authenticator = null;
+            }
+            else
+            {
+                this.client.Authenticator = new JwtAuthenticator(token);
+            }
+        }
 
         public List<API_User> ListAllUsers()
         {
-            RestRequest request = new RestRequest($"{API_BASE_URL}user/accounts/transfer");
+            RestRequest request = new RestRequest($"{API_BASE_URL}transfer/user/account");
             //request.AddHeader("Authorization", "bearer " + UserService.Token); //Use manually until we can find a shortcut
 
             IRestResponse<List<API_User>> response = client.Get<List<API_User>>(request);

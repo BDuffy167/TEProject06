@@ -43,8 +43,8 @@ namespace TenmoServer.DAO
         {
             return new UserAccount()
             {
-                User_Id = Convert.ToInt32(reader["user_id"]),
-                Account_Id = Convert.ToInt32(reader["account_id"]),
+                UserId = Convert.ToInt32(reader["user_id"]),
+                AccountId = Convert.ToInt32(reader["account_id"]),
                 Balance = Convert.ToDecimal(reader["balance"]),
             };
         }
