@@ -71,7 +71,15 @@ namespace TenmoClient
             return pass;
         }
 
-        //public decimal PromptForTransferAmount()
+        public void ListAllUsers(List<API_User> users)
+        {
+            foreach (API_User user in users)
+            {
+                Console.WriteLine($"{user.UserId})  {user.Username}");
+            }
+        }
+
+        //public decimal PromptForTransferAmount(string message)
         //{
 
         //}

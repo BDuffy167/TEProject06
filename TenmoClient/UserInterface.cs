@@ -11,6 +11,7 @@ namespace TenmoClient
         private readonly AuthService authService = new AuthService();
         private readonly AccountService accountService = new AccountService();
         private readonly TransferService transferService = new TransferService();
+
         
 
         private bool quitRequested = false;
@@ -80,7 +81,7 @@ namespace TenmoClient
                     switch (menuSelection)
                     {
                         case 1: // View Balance
-                            
+
                             Console.WriteLine(accountService.ShowAccountBalance()); // TODO: Implement me
                             break;
                         case 2: // View Past Transfers
@@ -90,29 +91,18 @@ namespace TenmoClient
                             Console.WriteLine("NOT IMPLEMENTED!"); // TODO: Implement me
                             break;
                         case 4: // Send TE Bucks
-                            List<API_User> usersSend = transferService.ListAllUsers(); //don't list current user
-                            foreach (API_User user in usersSend)
-                            {
-                                Console.WriteLine($"{user.UserId})  {user.Username}"); 
-                            }
-                            int transferToId = consoleService.PromptForTransferID("transfer money to.");
+                            List<API_User> users = transferService.GetAllUsers(); //don't list current user
+                            consoleService.ListAllUsers(users);
 
-                            foreach (API_User user in usersSend)
-                            {
-                                if (transferToId == user.UserId)
-                                {
-                                    //consoleService.PromptForTransferAmount(API_UserAccount );
-                                }
-                            }
+                            int transferId = consoleService.PromptForTransferID("send money.");
 
-                            //Console.WriteLine("NOT IMPLEMENTED!"); // TODO: Implement me
+                      
                             break;
                         case 5: // Request TE Bucks
-                            List<API_User> usersReq = transferService.ListAllUsers(); //don't list current user
-                            foreach (API_User user in usersReq)
-                            {
-                                Console.WriteLine($"{user.UserId})  {user.Username}");
-                            }
+                            users = transferService.GetAllUsers(); //don't list current user
+                            consoleService.ListAllUsers(users);
+
+                            transferId = consoleService.PromptForTransferID("request money.");
                             break;
                         case 6: // Log in as someone else
                             Console.WriteLine();
@@ -155,7 +145,7 @@ namespace TenmoClient
                     UserService.SetLogin(user);
                     this.accountService.UpdateToken(user.Token);
                     this.transferService.UpdateToken(user.Token);
-                    
+
                 }
             }
         }
