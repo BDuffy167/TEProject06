@@ -92,11 +92,11 @@ namespace TenmoClient
                             Console.WriteLine("NOT IMPLEMENTED!"); // TODO: Implement me
                             break;
                         case 4: // Send TE Bucks
-                            List<API_User> users = transferService.GetAllUsers(); //don't list current user
+                            List<UserAccount> users = transferService.GetAllUsers(); //don't list current user
                             consoleService.ListAllUsers(users);
                             int transferId = consoleService.PromptForTransferID("send money.");
 
-                            foreach (API_User user in users)
+                            foreach (UserAccount user in users)
                             {
                                 if (user.UserId == transferId)
                                 {
@@ -111,7 +111,7 @@ namespace TenmoClient
                             consoleService.ListAllUsers(users);
                             transferId = consoleService.PromptForTransferID("request money.");
 
-                            foreach (API_User user in users)
+                            foreach (UserAccount user in users)
                             {
                                 if (user.UserId == transferId)
                                 {

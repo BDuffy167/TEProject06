@@ -15,7 +15,10 @@ namespace TenmoServer.DAO
         {
             connectionString = dbConnectionString;
         }
-        private string GetAccountBalanceSQL = "SELECT user_id, account_id, balance FROM accounts WHERE user_id = @User_Id";
+        private string GetAccountBalanceSQL = "SELECT a.user_id, a.account_id, a.balance, u.username " +
+            "FROM accounts a " +
+            "JOIN users u ON a.user_id = u.user_id " +
+            "WHERE a.user_id = @User_Id";
 
         public UserAccount GetAccountBalance(int userId)
         {
@@ -43,6 +46,7 @@ namespace TenmoServer.DAO
         {
             return new UserAccount()
             {
+                Username = Convert.ToString(reader["username"]),
                 UserId = Convert.ToInt32(reader["user_id"]),
                 AccountId = Convert.ToInt32(reader["account_id"]),
                 Balance = Convert.ToDecimal(reader["balance"]),

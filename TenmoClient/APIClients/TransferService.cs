@@ -32,12 +32,12 @@ namespace TenmoClient.APIClients
             }
         }
 
-        public List<API_User> GetAllUsers()
+        public List<UserAccount> GetAllUsers()
         {
             RestRequest request = new RestRequest($"{API_BASE_URL}transfer/users");
 
 
-            IRestResponse<List<API_User>> response = client.Get<List<API_User>>(request);
+            IRestResponse<List<UserAccount>> response = client.Get<List<UserAccount>>(request);
             if (response.IsSuccessful)
             {
                 return response.Data;

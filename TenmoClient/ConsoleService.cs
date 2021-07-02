@@ -71,9 +71,9 @@ namespace TenmoClient
             return pass;
         }
 
-        public void ListAllUsers(List<API_User> users)
+        public void ListAllUsers(List<UserAccount> users)
         {
-            foreach (API_User user in users)
+            foreach (UserAccount user in users)
             {
                 Console.WriteLine($"{user.UserId})  {user.Username}");
             }

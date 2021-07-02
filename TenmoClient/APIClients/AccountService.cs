@@ -37,11 +37,11 @@ namespace TenmoClient.APIClients
             //request.AddHeader("Authorization", "bearer " + API_User.user.Token); //Use manually until we can find a shortcut
 
 
-            IRestResponse<API_UserAccount> response = client.Get<API_UserAccount>(request);
+            IRestResponse<UserAccount> response = client.Get<UserAccount>(request);
             if (response.IsSuccessful)
             {
                 //API_UserAccount usersAccount = new API_UserAccount();
-                API_UserAccount userAccount = response.Data;
+                UserAccount userAccount = response.Data;
                 return userAccount.Balance;
             }
             else
