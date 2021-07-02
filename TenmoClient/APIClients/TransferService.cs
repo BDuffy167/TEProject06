@@ -51,7 +51,14 @@ namespace TenmoClient.APIClients
 
         public void BeginMoneyTransfer(int transferFromId, int transferToId)
         {
-            Console.WriteLine("It's working, keep going.");
+            if (transferFromId == UserService.UserId)
+            {
+
+            }
+            else
+            {
+
+            }
         }
     }
 }
