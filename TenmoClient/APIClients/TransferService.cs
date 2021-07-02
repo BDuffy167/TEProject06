@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using TenmoClient.Data;
+using TenmoServer.Models;
 
 namespace TenmoClient.APIClients
 {
@@ -33,7 +34,7 @@ namespace TenmoClient.APIClients
 
         public List<API_User> GetAllUsers()
         {
-            RestRequest request = new RestRequest($"{API_BASE_URL}transfer/user/account");
+            RestRequest request = new RestRequest($"{API_BASE_URL}transfer/users");
 
 
             IRestResponse<List<API_User>> response = client.Get<List<API_User>>(request);
@@ -49,9 +50,47 @@ namespace TenmoClient.APIClients
             }
         }
 
-        public void BeginMoneyTransfer(int transferFromId, int transferToId, decimal amount)
+        public void BeginMoneyTransfer(int transferFromId, int transferToId, decimal amount) // account is valid for transfer $
         {
-            Console.WriteLine("It's working, keep going.");
+            Transfer transfer = new Transfer();
+            transfer.AccountFrom = transferFromId;
+            transfer.AccountTo = transferToId;
+            transfer.Amount = amount;
+
+            if (transferFromId == UserService.UserId) //path for sending money
+            {
+                transfer.Type = 1001; // code for "send"
+                transfer.Status = 2001; // code for "approved"
+
+                // Post new transfer
+                PostNewTransfer(transfer);
+                // Update both user's balances
+            }
+            else //path for requesting money
+            {
+                transfer.Type = 1000; // code for "request"
+                transfer.Status = 2000; // code for "pending"
+            }
+        }
+
+        private Transfer PostNewTransfer(Transfer transfer)
+        {
+            RestRequest request = new RestRequest($"{API_BASE_URL}transfer");
+            request.AddJsonBody(transfer);
+
+            IRestResponse<Transfer> response = client.Post<Transfer>(request);
+
+            if (response.IsSuccessful && response.ResponseStatus == ResponseStatus.Completed)
+            {
+                return response.Data;
+            }
+            else
+            {
+                Console.WriteLine("An error occurred creating a new transfer.");
+
+                return null;
+            }
+
         }
     }
 }

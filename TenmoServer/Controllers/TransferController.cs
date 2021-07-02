@@ -10,7 +10,7 @@ using TenmoServer.Models;
 
 namespace TenmoServer.Controllers
 {
-    [Route("[controller]/user/account/")]
+    [Route("[controller]")]
     [ApiController]
     [Authorize]
     public class TransferController : ControllerBase
@@ -24,7 +24,7 @@ namespace TenmoServer.Controllers
 
 
 
-        [HttpGet]
+        [HttpGet("/users")]
         //[AllowAnonymous]
         public ActionResult<List<User>> GetUsers()
         {
