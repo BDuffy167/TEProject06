@@ -31,7 +31,7 @@ namespace TenmoClient.APIClients
             }
         }
 
-        public string ShowAccountBalance()
+        public decimal ShowAccountBalance()
         {
             RestRequest request = new RestRequest($"{API_BASE_URL}account");
             //request.AddHeader("Authorization", "bearer " + API_User.user.Token); //Use manually until we can find a shortcut
@@ -42,13 +42,13 @@ namespace TenmoClient.APIClients
             {
                 //API_UserAccount usersAccount = new API_UserAccount();
                 API_UserAccount userAccount = response.Data;
-                return userAccount.Balance.ToString("C2");
+                return userAccount.Balance;
             }
             else
             {
                 //What do we return here with failed Get
                 Console.WriteLine("There is a problem with the Get"); // make more explicit later
-                return null;
+                return 0;
             }
         }
 

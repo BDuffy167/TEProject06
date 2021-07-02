@@ -83,7 +83,7 @@ namespace TenmoClient
                     {
                         case 1: // View Balance
 
-                            Console.WriteLine(accountService.ShowAccountBalance()); // TODO: Implement me
+                            Console.WriteLine(accountService.ShowAccountBalance().ToString("C2")); // TODO: Implement me
                             break;
                         case 2: // View Past Transfers
                             Console.WriteLine("NOT IMPLEMENTED!"); // TODO: Implement me
@@ -170,27 +170,34 @@ namespace TenmoClient
         }
         public decimal PromptForAmount()
         {
-            bool validInput = false;
-            while (!validInput)
+
+            bool valid = false;
+            while (!valid)
             {
+
                 Console.WriteLine("How much would you like to transfer?");
-                decimal.TryParse(Console.ReadLine(), out decimal userInput);
+                //decimal.TryParse(Console.ReadLine(), out decimal userInput);
                 //Console.WriteLine($"{userInput}");
                 //decimal userBalance = Convert.ToDecimal(accountService.ShowAccountBalance());
-                string userBalance = accountService.ShowAccountBalance();
-                decimal userdecimal = Convert.ToDecimal(userBalance);
-                if (userInput <= userdecimal)
+                //decimal userdecimal = Convert.ToDecimal(userBalance);
+                decimal userBalance = accountService.ShowAccountBalance();
+                if (!int.TryParse(Console.ReadLine(), out int userInput))
                 {
-                    validInput = true;
+                    Console.WriteLine("Invalid input. Only input a number.");
+                    continue; ; //make this loop over prompt / response.
+                }
+                if (userInput <= userBalance)
+                {
                     return userInput;
                 }
                 else
                 {
-                    Console.WriteLine("Please enter a valid transfer");
-                    
+                    Console.WriteLine("error");
+                    continue;
                 }
 
                 
+            
             }
             return 0;
         }
