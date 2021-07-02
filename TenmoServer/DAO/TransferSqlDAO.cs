@@ -66,10 +66,10 @@ namespace TenmoServer.DAO
                 cmd.Parameters.AddWithValue("@AccountFrom", transfer.AccountFrom);
                 cmd.Parameters.AddWithValue("@AccountTo", transfer.AccountTo);
                 cmd.Parameters.AddWithValue("@Amount", transfer.Amount);
-                
-                //SqlDataReader reader = cmd.ExecuteReader();
-                //reader.Read();
-                //transfer.Id = Convert.ToInt32(reader["id"]);
+                cmd.ExecuteNonQuery();
+                SqlDataReader reader = cmd.ExecuteReader();
+                reader.Read();
+                transfer.Id = Convert.ToInt32(reader["id"]);
 
 
                 //transfer.Id = Convert.ToInt32(cmd.ExecuteScalar());
@@ -89,7 +89,7 @@ namespace TenmoServer.DAO
                 cmd.Parameters.AddWithValue("@AccountFrom", transfer.AccountFrom);
                 cmd.Parameters.AddWithValue("@AccountTo", transfer.AccountTo);
                 cmd.Parameters.AddWithValue("@Amount", transfer.Amount);
-
+                cmd.ExecuteNonQuery();
             }
 
         }
