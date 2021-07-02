@@ -11,6 +11,10 @@ namespace TenmoServer.DAO
     {
         private readonly string connectionString;
 
+        private readonly string insertNewTransferSql =  
+            "INSERT INTO transfers (transfer_type_id, transfer_status_id, account_from, account_to, amount) " +
+            "VALUES(@TransferTypeId, @TransferStatusId, @AccountFrom, @AccountTo, @Amount)";
+
         public TransferSqlDAO(string dbConnectionString)
         {
             connectionString = dbConnectionString;
@@ -39,6 +43,24 @@ namespace TenmoServer.DAO
             }
 
             return returnUsers;
+        }
+
+        public Transfer PostNewTransfer(Transfer transfer) //change name?
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                SqlCommand cmd = new SqlCommand(insertNewTransferSql, conn);
+
+                cmd.Parameters.AddWithValue("@TransferTypeId", transfer.Type);
+                cmd.Parameters.AddWithValue("@TransferStatusId", transfer.Status);
+                cmd.Parameters.AddWithValue("@AccountFrom", transfer.AccountFrom);
+                cmd.Parameters.AddWithValue("@AccountTo", transfer.AccountTo);
+                cmd.Parameters.AddWithValue("@Amount", transfer.Amount);
+
+                transfer.Id = Convert.ToInt32(cmd.ExecuteScalar());
+            }
         }
 
         private User GetUserFromReader(SqlDataReader reader)

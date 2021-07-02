@@ -12,6 +12,8 @@ namespace TenmoServer.Models
         public decimal Amount { get; set; }
         public int Type { get; set; }
         public int Status { get; set; }
-        
+
+        public int Id { get; set; }
+
     }
 }

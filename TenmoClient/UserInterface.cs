@@ -100,11 +100,7 @@ namespace TenmoClient
                             {
                                 if (user.UserId == transferId)
                                 {
-                                    //bool validInput = false;
-                                    //while (!validInput)
                                     decimal userAmount = PromptForAmount();
-                                    Console.WriteLine("How much would you like to transfer?");
-                                    
 
                                     transferService.BeginMoneyTransfer(UserService.UserId, transferId, userAmount);
                                 }
@@ -182,7 +178,7 @@ namespace TenmoClient
                 //decimal userBalance = Convert.ToDecimal(accountService.ShowAccountBalance());
                 //decimal userdecimal = Convert.ToDecimal(userBalance);
                 decimal userBalance = accountService.ShowAccountBalance();
-                if (!int.TryParse(Console.ReadLine(), out int userInput))
+                if (!decimal.TryParse(Console.ReadLine(), out decimal userInput))
                 {
                     Console.WriteLine("Invalid input. Only input a number.");
                     continue; ; //make this loop over prompt / response.

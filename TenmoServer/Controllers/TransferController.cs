@@ -24,13 +24,20 @@ namespace TenmoServer.Controllers
 
 
 
-        [HttpGet("/users")]
-        //[AllowAnonymous]
+        [HttpGet("users")]
         public ActionResult<List<User>> GetUsers()
         {
             //int userId = int.Parse(this.User.FindFirst("sub").Value);
 
             return Ok(this.transferDAO.GetUsersForTransfer());
+        }
+
+        [HttpPost] // figure out URL
+        public ActionResult<Transfer> PostNewTransfer(Transfer transfer)
+        {
+            Transfer newTransfer = this.transferDAO.PostNewTransfer(transfer);
+
+            return Created($"/transfer/{newTransfer.Id}", newTransfer);
         }
     }
 }
