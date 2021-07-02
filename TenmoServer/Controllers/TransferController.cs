@@ -36,7 +36,10 @@ namespace TenmoServer.Controllers
         public ActionResult<Transfer> PostNewTransfer(Transfer transfer)
         {
             Transfer newTransfer = this.transferDAO.PostNewTransfer(transfer);
-
+            if (newTransfer.Status == 2001)
+            {
+                this.transferDAO.EnactTransferOfBlances(newTransfer);
+            }
             return Created($"/transfer/{newTransfer.Id}", newTransfer);
         }
     }

@@ -13,7 +13,15 @@ namespace TenmoServer.DAO
 
         private readonly string insertNewTransferSql =  
             "INSERT INTO transfers (transfer_type_id, transfer_status_id, account_from, account_to, amount) " +
-            "VALUES(@TransferTypeId, @TransferStatusId, @AccountFrom, @AccountTo, @Amount)";
+            "VALUES(@TransferTypeId, @TransferStatusId, @AccountFrom, @AccountTo, @Amount) " +
+            "SELECT @@IDENTITY AS 'id';";
+        private readonly string UpdateBalanceOnTransferSql =
+            "UPDATE accounts " +
+            "SET balance -= @amount " +
+            "WHERE user_id = @accountFrom " +
+            "UPDATE accounts " +
+            "SET balance += @amount " +
+            "WHERE user_id = @accountTo "; 
 
         public TransferSqlDAO(string dbConnectionString)
         {
@@ -58,11 +66,33 @@ namespace TenmoServer.DAO
                 cmd.Parameters.AddWithValue("@AccountFrom", transfer.AccountFrom);
                 cmd.Parameters.AddWithValue("@AccountTo", transfer.AccountTo);
                 cmd.Parameters.AddWithValue("@Amount", transfer.Amount);
+                
+                //SqlDataReader reader = cmd.ExecuteReader();
+                //reader.Read();
+                //transfer.Id = Convert.ToInt32(reader["id"]);
 
-                transfer.Id = Convert.ToInt32(cmd.ExecuteScalar());
+
+                //transfer.Id = Convert.ToInt32(cmd.ExecuteScalar());
+
+
             }
-        }
+                
 
+            return transfer;
+        }
+        public void EnactTransferOfBlances(Transfer transfer)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(UpdateBalanceOnTransferSql, conn);
+                cmd.Parameters.AddWithValue("@AccountFrom", transfer.AccountFrom);
+                cmd.Parameters.AddWithValue("@AccountTo", transfer.AccountTo);
+                cmd.Parameters.AddWithValue("@Amount", transfer.Amount);
+
+            }
+
+        }
         private User GetUserFromReader(SqlDataReader reader)
         {
             return new User()
