@@ -119,7 +119,8 @@ namespace TenmoClient
                             {
                                 if (user.UserId == transferId)
                                 {
-                                    transferService.BeginMoneyTransfer(transferId, UserService.UserId);
+                                    decimal userAmount = 0;
+                                    transferService.BeginMoneyTransfer(transferId, UserService.UserId, userAmount);
                                 }
                             }
                             break;
