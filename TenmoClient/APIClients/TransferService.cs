@@ -49,7 +49,7 @@ namespace TenmoClient.APIClients
             }
         }
 
-        public void BeginMoneyTransfer(int transferFromId, int transferToId)
+        public void BeginMoneyTransfer(int transferFromId, int transferToId, decimal amount)
         {
             Console.WriteLine("It's working, keep going.");
         }
