@@ -106,7 +106,7 @@ namespace TenmoClient
                                     Console.WriteLine("How much would you like to transfer?");
                                     
 
-                                    transferService.BeginMoneyTransfer(UserService.UserId, transferId);
+                                    transferService.BeginMoneyTransfer(UserService.UserId, transferId, userAmount);
                                 }
                             }
                             break;
@@ -195,9 +195,6 @@ namespace TenmoClient
                     Console.WriteLine("error");
                     continue;
                 }
-
-                
-            
             }
             return 0;
         }
