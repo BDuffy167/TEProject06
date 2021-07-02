@@ -83,7 +83,7 @@ namespace TenmoClient
                     {
                         case 1: // View Balance
 
-                            Console.WriteLine(accountService.ShowAccountBalance()); // TODO: Implement me
+                            Console.WriteLine(accountService.ShowAccountBalance().ToString("C2")); // TODO: Implement me
                             break;
                         case 2: // View Past Transfers
                             Console.WriteLine("NOT IMPLEMENTED!"); // TODO: Implement me
@@ -100,7 +100,13 @@ namespace TenmoClient
                             {
                                 if (user.UserId == transferId)
                                 {
-                                    transferService.BeginMoneyTransfer(UserService.UserId, transferId);
+                                    //bool validInput = false;
+                                    //while (!validInput)
+                                    decimal userAmount = PromptForAmount();
+                                    Console.WriteLine("How much would you like to transfer?");
+                                    
+
+                                    transferService.BeginMoneyTransfer(UserService.UserId, transferId, userAmount);
                                 }
                             }
                             break;
@@ -113,7 +119,8 @@ namespace TenmoClient
                             {
                                 if (user.UserId == transferId)
                                 {
-                                    transferService.BeginMoneyTransfer(transferId, UserService.UserId);
+                                    decimal userAmount = 0;
+                                    transferService.BeginMoneyTransfer(transferId, UserService.UserId, userAmount);
                                 }
                             }
                             break;
@@ -161,6 +168,36 @@ namespace TenmoClient
 
                 }
             }
+        }
+        public decimal PromptForAmount()
+        {
+
+            bool valid = false;
+            while (!valid)
+            {
+
+                Console.WriteLine("How much would you like to transfer?");
+                //decimal.TryParse(Console.ReadLine(), out decimal userInput);
+                //Console.WriteLine($"{userInput}");
+                //decimal userBalance = Convert.ToDecimal(accountService.ShowAccountBalance());
+                //decimal userdecimal = Convert.ToDecimal(userBalance);
+                decimal userBalance = accountService.ShowAccountBalance();
+                if (!int.TryParse(Console.ReadLine(), out int userInput))
+                {
+                    Console.WriteLine("Invalid input. Only input a number.");
+                    continue; ; //make this loop over prompt / response.
+                }
+                if (userInput <= userBalance)
+                {
+                    return userInput;
+                }
+                else
+                {
+                    Console.WriteLine("error");
+                    continue;
+                }
+            }
+            return 0;
         }
     }
 }
