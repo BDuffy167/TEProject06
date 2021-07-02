@@ -8,7 +8,7 @@ namespace TenmoServer.DAO
 {
     public interface ITransferDAO
     {
-        public List<User> GetUsersForTransfer();
+        public List<UserAccount> GetUsersForTransfer();
         Transfer PostNewTransfer(Transfer transfer);
         void EnactTransferOfBlances(Transfer transfer);
     }

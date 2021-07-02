@@ -57,7 +57,7 @@ namespace TenmoClient.APIClients
             transfer.AccountTo = transferToId;
             transfer.Amount = amount;
 
-            if (transferFromId == UserService.UserId) //path for sending money
+            if (transferFromId == (UserService.UserId + 1000)) //path for sending money
             {
                 transfer.Type = 1001; // code for "send"
                 transfer.Status = 2001; // code for "approved"

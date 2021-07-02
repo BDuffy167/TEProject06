@@ -25,7 +25,7 @@ namespace TenmoServer.Controllers
 
 
         [HttpGet("users")]
-        public ActionResult<List<User>> GetUsers()
+        public ActionResult<List<UserAccount>> GetUsers()
         {
             //int userId = int.Parse(this.User.FindFirst("sub").Value);
 

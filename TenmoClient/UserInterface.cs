@@ -102,7 +102,7 @@ namespace TenmoClient
                                 {
                                     decimal userAmount = PromptForAmount();
 
-                                    transferService.BeginMoneyTransfer(UserService.UserId, transferId, userAmount);
+                                    transferService.BeginMoneyTransfer((UserService.UserId + 1000), user.AccountId, userAmount);
                                 }
                             }
                             break;
