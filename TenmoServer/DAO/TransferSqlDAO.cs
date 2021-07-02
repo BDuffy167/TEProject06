@@ -49,5 +49,9 @@ namespace TenmoServer.DAO
                 Username = Convert.ToString(reader["username"]),
             };
         }
+        //public bool InsertTransferToDatabase(Transfer transfer)
+        //{
+
+        //}
     }
 }

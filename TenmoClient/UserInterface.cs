@@ -100,6 +100,12 @@ namespace TenmoClient
                             {
                                 if (user.UserId == transferId)
                                 {
+                                    //bool validInput = false;
+                                    //while (!validInput)
+                                    decimal userAmount = PromptForAmount();
+                                    Console.WriteLine("How much would you like to transfer?");
+                                    
+
                                     transferService.BeginMoneyTransfer(UserService.UserId, transferId);
                                 }
                             }
@@ -161,6 +167,32 @@ namespace TenmoClient
 
                 }
             }
+        }
+        public decimal PromptForAmount()
+        {
+            bool validInput = false;
+            while (!validInput)
+            {
+                Console.WriteLine("How much would you like to transfer?");
+                decimal.TryParse(Console.ReadLine(), out decimal userInput);
+                //Console.WriteLine($"{userInput}");
+                //decimal userBalance = Convert.ToDecimal(accountService.ShowAccountBalance());
+                string userBalance = accountService.ShowAccountBalance();
+                decimal userdecimal = Convert.ToDecimal(userBalance);
+                if (userInput <= userdecimal)
+                {
+                    validInput = true;
+                    return userInput;
+                }
+                else
+                {
+                    Console.WriteLine("Please enter a valid transfer");
+                    
+                }
+
+                
+            }
+            return 0;
         }
     }
 }
