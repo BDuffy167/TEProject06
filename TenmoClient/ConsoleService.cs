@@ -87,7 +87,7 @@ namespace TenmoClient
 
             foreach (Transfer t in transfers)
             {
-                if (t.AccountFrom == UserService.UserId + 1000) // future proof way to get AccountId?
+                if (t.AccountFrom == UserService.UserId + 1000) // future proof way to get AccountId? Also format
                 {
                     Console.WriteLine($"{t.Id}  To: {t.UserNameTo}  ${t.Amount}");
                 }
