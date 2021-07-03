@@ -96,8 +96,8 @@ namespace TenmoClient
                     Console.WriteLine($"{t.Id}  From: {t.UserNameTo}  ${t.Amount}");
                 }
 
-                ShowSpecificTransfer(PromptForTransferID("view."), transfers);
             }
+                ShowSpecificTransfer(PromptForTransferID("view."), transfers);
         }
 
         public void ShowSpecificTransfer(int id, List<Transfer> transfers)
