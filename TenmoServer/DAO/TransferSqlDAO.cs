@@ -24,7 +24,20 @@ namespace TenmoServer.DAO
         private string GetUserAccountSql = "SELECT a.user_id, a.account_id, a.balance, u.username " +
             "FROM accounts a " +
             "JOIN users u ON a.user_id = u.user_id";
-        private string GetAllTransfersSQL = "";
+        private string GetAllTransfersSQL = 
+        "SELECT t.transfer_id, " +
+            "t.transfer_type_id, " +
+            "t.transfer_status_id, " +
+            "t.account_from, " +
+            "t.account_to, " +
+            "t.amount, " +
+	        "u.username AS userfrom, " +
+	        "l.username AS userto " +
+        "FROM transfers t " +
+            "JOIN accounts a ON a.account_id = t.account_from " +
+            "JOIN users u ON u.user_id = a.user_id " +
+            "JOIN accounts b ON b.account_id = t.account_to " +
+            "JOIN users l ON l.user_id = b.user_id";
 
 
 
@@ -110,6 +123,7 @@ namespace TenmoServer.DAO
         }
         public List<Transfer> GetAllTransfers()
         {
+            List<Transfer> transfers = new List<Transfer>();
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
@@ -118,14 +132,33 @@ namespace TenmoServer.DAO
 
                 SqlDataReader reader = cmd.ExecuteReader();
 
-                if (reader.Read())
+                while (reader.Read())
                 {
+                    Transfer transfer = new Transfer();
+                    transfer.UserNameTo = Convert.ToString(reader["userto"]);
+                    transfer.UserNameFrom = Convert.ToString(reader["userfrom"]);
+                    transfer.AccountTo = Convert.ToInt32(reader["account_to"]);
+                    transfer.AccountFrom = Convert.ToInt32(reader["account_from"]);
+                    transfer.Amount = Convert.ToDecimal(reader["amount"]);
+                    transfer.Type = Convert.ToInt32(reader["transfer_type_id"]);
+                    transfer.Status = Convert.ToInt32(reader["transfer_status_id"]);
 
+                    transfers.Add(transfer);
                 }
 
             }
-            return null;
+            return transfers;
         }
+        //private List<Transfer> GetTransfersFromReader(SqlDataReader reader)
+        //{
+        //    return new List<Transfer>()
+        //    {
+        //        //Username = Convert.ToString(reader["username"]),
+        //        //UserId = Convert.ToInt32(reader["user_id"]),
+        //        //AccountId = Convert.ToInt32(reader["account_id"]),
+        //        //Balance = Convert.ToDecimal(reader["balance"]),
+        //    };
+        //}
 
     }
 }
