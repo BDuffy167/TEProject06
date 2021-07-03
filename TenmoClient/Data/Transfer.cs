@@ -7,6 +7,7 @@ namespace TenmoServer.Models
 {
     public class Transfer
     {
+        public int Id { get; set; }
         public string UserNameTo { get; set; }
         public string UserNameFrom { get; set; }
         public int AccountTo { get; set; }

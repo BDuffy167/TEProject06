@@ -88,8 +88,8 @@ namespace TenmoClient
                             break;
                         case 2: // View Past Transfers
                             List<Transfer> transfers = transferService.RequestUserTransfersFromServer();
+                            consoleService.ShowPastTransfers(transfers);
 
-                            Console.WriteLine("NOT IMPLEMENTED!"); // TODO: Implement me
                             break;
                         case 3: // View Pending Requests
                             Console.WriteLine("NOT IMPLEMENTED!"); // TODO: Implement me

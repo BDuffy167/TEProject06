@@ -135,6 +135,7 @@ namespace TenmoServer.DAO
                 while (reader.Read())
                 {
                     Transfer transfer = new Transfer();
+                    transfer.Id = Convert.ToInt32(reader["transfer_id"]);
                     transfer.UserNameTo = Convert.ToString(reader["userto"]);
                     transfer.UserNameFrom = Convert.ToString(reader["userfrom"]);
                     transfer.AccountTo = Convert.ToInt32(reader["account_to"]);

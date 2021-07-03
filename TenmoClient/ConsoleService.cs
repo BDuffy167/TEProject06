@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using TenmoClient.Data;
+using TenmoServer.Models;
 
 namespace TenmoClient
 {
@@ -76,6 +77,44 @@ namespace TenmoClient
             foreach (UserAccount user in users)
             {
                 Console.WriteLine($"{user.UserId})  {user.Username}");
+            }
+        }
+
+        public void ShowPastTransfers(List<Transfer> transfers)
+        {
+            Console.WriteLine("Transfers");
+            Console.WriteLine("Id    From/To    Amount");
+
+            foreach (Transfer t in transfers)
+            {
+                if (t.AccountFrom == UserService.UserId + 1000) // future proof way to get AccountId?
+                {
+                    Console.WriteLine($"{t.Id}  To: {t.UserNameTo}  ${t.Amount}");
+                }
+                else if (t.AccountTo == UserService.UserId + 1000)
+                {
+                    Console.WriteLine($"{t.Id}  From: {t.UserNameTo}  ${t.Amount}");
+                }
+
+                ShowSpecificTransfer(PromptForTransferID("view."), transfers);
+            }
+        }
+
+        public void ShowSpecificTransfer(int id, List<Transfer> transfers)
+        {
+            foreach (Transfer t in transfers)
+            {
+                if (t.Id == id)
+                {
+                    Console.WriteLine("Transfer Details");
+                    Console.WriteLine("");
+                    Console.WriteLine($"Id: {t.Id}");
+                    Console.WriteLine($"From: {t.UserNameFrom}");
+                    Console.WriteLine($"To: {t.UserNameTo}");
+                    Console.WriteLine($"Type: {t.TypeName}");
+                    Console.WriteLine($"Status: {t.StatusName}");
+                    Console.WriteLine($"Amount: ${t.Amount}");
+                }
             }
         }
 
