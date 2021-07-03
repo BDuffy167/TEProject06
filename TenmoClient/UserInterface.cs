@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TenmoClient.APIClients;
 using TenmoClient.Data;
+using TenmoServer.Models;
 
 namespace TenmoClient
 {
@@ -86,6 +87,8 @@ namespace TenmoClient
                             Console.WriteLine(accountService.ShowAccountBalance().ToString("C2")); // TODO: Implement me
                             break;
                         case 2: // View Past Transfers
+                            List<Transfer> transfers = transferService.RequestUserTransfersFromServer();
+
                             Console.WriteLine("NOT IMPLEMENTED!"); // TODO: Implement me
                             break;
                         case 3: // View Pending Requests

@@ -24,7 +24,9 @@ namespace TenmoServer.DAO
         private string GetUserAccountSql = "SELECT a.user_id, a.account_id, a.balance, u.username " +
             "FROM accounts a " +
             "JOIN users u ON a.user_id = u.user_id";
-            
+        private string GetAllTransfersSQL = "";
+
+
 
         public TransferSqlDAO(string dbConnectionString)
         {
@@ -106,9 +108,24 @@ namespace TenmoServer.DAO
                 Balance = Convert.ToDecimal(reader["balance"]),
             };
         }
-        //public bool InsertTransferToDatabase(Transfer transfer)
-        //{
+        public List<Transfer> GetAllTransfers()
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
 
-        //}
+                SqlCommand cmd = new SqlCommand(GetAllTransfersSQL, conn);
+
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.Read())
+                {
+
+                }
+
+            }
+            return null;
+        }
+
     }
 }

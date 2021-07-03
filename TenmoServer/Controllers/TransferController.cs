@@ -42,5 +42,11 @@ namespace TenmoServer.Controllers
             }
             return Created($"/transfer/{newTransfer.Id}", newTransfer);
         }
+        [HttpGet]
+        public ActionResult<List<Transfer>> GetTransfersFromDao()
+        {
+            List<Transfer> transfers = this.transferDAO.GetAllTransfers();
+            return transfers;
+        }
     }
 }

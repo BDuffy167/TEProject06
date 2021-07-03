@@ -92,5 +92,21 @@ namespace TenmoClient.APIClients
             }
 
         }
+        public List<Transfer> RequestUserTransfersFromServer()
+        {
+            RestRequest request = new RestRequest($"{API_BASE_URL}transfer");
+
+            IRestResponse<List<Transfer>> response = client.Get<List<Transfer>>(request);
+            if (response.IsSuccessful && response.ResponseStatus == ResponseStatus.Completed)
+            {
+                return response.Data;
+            }
+            else
+            {
+                Console.WriteLine("An error occurred fetching the transfers.");
+
+                return null;
+            }
+        }
     }
 }

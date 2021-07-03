@@ -11,5 +11,7 @@ namespace TenmoServer.DAO
         public List<UserAccount> GetUsersForTransfer();
         Transfer PostNewTransfer(Transfer transfer);
         void EnactTransferOfBlances(Transfer transfer);
+
+        List<Transfer> GetAllTransfers();
     }
 }
