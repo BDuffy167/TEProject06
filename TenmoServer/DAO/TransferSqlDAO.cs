@@ -13,15 +13,14 @@ namespace TenmoServer.DAO
 
         private readonly string insertNewTransferSql =  
             "INSERT INTO transfers (transfer_type_id, transfer_status_id, account_from, account_to, amount) " +
-            "VALUES(@TransferTypeId, @TransferStatusId, @AccountFrom, @AccountTo, @Amount) " +
-            "SELECT @@IDENTITY AS 'id';";
+            "VALUES(@TransferTypeId, @TransferStatusId, @AccountFrom, @AccountTo, @Amount);";
         private readonly string UpdateBalanceOnTransferSql =
             "UPDATE accounts " +
             "SET balance -= @amount " +
-            "WHERE user_id = @accountFrom " +
+            "WHERE account_id = @accountFrom; " +
             "UPDATE accounts " +
             "SET balance += @amount " +
-            "WHERE user_id = @accountTo ";
+            "WHERE account_id = @accountTo; ";
         private string GetUserAccountSql = "SELECT a.user_id, a.account_id, a.balance, u.username " +
             "FROM accounts a " +
             "JOIN users u ON a.user_id = u.user_id";
@@ -70,7 +69,7 @@ namespace TenmoServer.DAO
                 cmd.Parameters.AddWithValue("@AccountFrom", transfer.AccountFrom);
                 cmd.Parameters.AddWithValue("@AccountTo", transfer.AccountTo);
                 cmd.Parameters.AddWithValue("@Amount", transfer.Amount);
-                //cmd.ExecuteNonQuery();
+                cmd.ExecuteNonQuery();
                 //SqlDataReader reader = cmd.ExecuteReader();
                 //reader.Read();
                 //transfer.Id = Convert.ToInt32(reader["id"]);
