@@ -22,7 +22,7 @@ namespace TenmoClient
         {
             while (!quitRequested)
             {
-                while (!authService.IsLoggedIn)
+                while (!UserService.IsLoggedIn)
                 {
                     ShowLogInMenu();
                 }
@@ -176,10 +176,7 @@ namespace TenmoClient
             {
 
                 Console.WriteLine("How much would you like to transfer?");
-                //decimal.TryParse(Console.ReadLine(), out decimal userInput);
-                //Console.WriteLine($"{userInput}");
-                //decimal userBalance = Convert.ToDecimal(accountService.ShowAccountBalance());
-                //decimal userdecimal = Convert.ToDecimal(userBalance);
+                
                 decimal userBalance = accountService.ShowAccountBalance();
                 if (!decimal.TryParse(Console.ReadLine(), out decimal userInput))
                 {

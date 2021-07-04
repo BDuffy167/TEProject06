@@ -47,7 +47,7 @@ namespace TenmoClient.APIClients
             else
             {
                 //What do we return here with failed Get
-                Console.WriteLine("There is a problem with the Get"); // make more explicit later
+                Console.WriteLine($"{(int)response.StatusCode} error occurred getting request"); // make more explicit later
                 return 0;
             }
         }

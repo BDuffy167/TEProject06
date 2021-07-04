@@ -38,14 +38,14 @@ namespace TenmoClient.APIClients
 
 
             IRestResponse<List<UserAccount>> response = client.Get<List<UserAccount>>(request);
-            if (response.IsSuccessful)
+            if (response.IsSuccessful && response.ResponseStatus == ResponseStatus.Completed)
             {
                 return response.Data;
             }
             else
             {
                 //What do we return here with failed Get
-                Console.WriteLine("There is a problem with the Get");
+                Console.WriteLine($"{(int)response.StatusCode} error occurred getting request");
                 return null;
             }
         }
@@ -86,7 +86,7 @@ namespace TenmoClient.APIClients
             }
             else
             {
-                Console.WriteLine("An error occurred creating a new transfer.");
+                Console.WriteLine($"{(int)response.StatusCode} error occurred. Could not create a new transfer.");
 
                 return null;
             }
@@ -103,7 +103,8 @@ namespace TenmoClient.APIClients
             }
             else
             {
-                Console.WriteLine("An error occurred fetching the transfers.");
+                
+                Console.WriteLine($"{(int)response.StatusCode} error occurred fetching the transfers.");
 
                 return null;
             }

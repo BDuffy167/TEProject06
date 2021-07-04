@@ -108,10 +108,10 @@ namespace TenmoClient
                 {
                     Console.WriteLine("Transfer Details");
                     Console.WriteLine("");
-                    Console.WriteLine($"Id: {t.Id}");
-                    Console.WriteLine($"From: {t.UserNameFrom}");
-                    Console.WriteLine($"To: {t.UserNameTo}");
-                    Console.WriteLine($"Type: {t.TypeName}");
+                    Console.WriteLine($"Id:     {t.Id}");
+                    Console.WriteLine($"From:   {t.UserNameFrom}");
+                    Console.WriteLine($"To:     {t.UserNameTo}");
+                    Console.WriteLine($"Type:   {t.TypeName}");
                     Console.WriteLine($"Status: {t.StatusName}");
                     Console.WriteLine($"Amount: ${t.Amount}");
                 }
