@@ -174,7 +174,6 @@ namespace TenmoClient
             bool valid = false;
             while (!valid)
             {
-
                 Console.WriteLine("How much would you like to transfer?");
                 
                 decimal userBalance = accountService.ShowAccountBalance();
